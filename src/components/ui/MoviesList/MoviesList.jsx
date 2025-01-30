@@ -1,6 +1,6 @@
-import { Pagination, Stack } from '@mui/material'
-import React from 'react'
-import MoviesCard from '../MoviesCard'
+import { Pagination, Stack } from '@mui/material';
+import React from 'react';
+import MoviesCard from '../MoviesCard';
 export default function MoviesList({movies, totalPages, page, setPage}) {
 
   return (

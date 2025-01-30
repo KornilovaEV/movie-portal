@@ -1,19 +1,22 @@
 import { Button, Input, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../../context';
+import { useTranslation } from 'react-i18next';
 
 export default function Registration() {
+    const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordDouble, setPasswordDouble] = useState('');
     const [emailDirty, setEmailDirty] = useState(false);
     const [passwordDirty, setPasswordDirty] = useState(false);
     const [passwordDoubleDirty, setPasswordDoubleDirty] = useState(false);
-    const [emailError, setEmailError] = useState('Email не может быть пустым');
-    const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
-    const [passwordDoubleError, setPasswordDoubleError] = useState('Пароли должны совпадать');
+    const [emailError, setEmailError] = useState(t('emailNull'));
+    const [passwordError, setPasswordError] = useState(t('passwordNull'));
+    const [passwordDoubleError, setPasswordDoubleError] = useState(t('passwordEqual'));
     const [formValid, setFormValid] = useState(false);
     const {userItems, setUserItems} = useContext(AppContext);  
+    
 
     useEffect(() => {
               localStorage.setItem('userItems', JSON.stringify(userItems));
@@ -48,7 +51,7 @@ export default function Registration() {
       const re =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if(!re.test(String(e.target.value).toLocaleLowerCase())){
-      setEmailError('Email не корректный')
+      setEmailError(t('emailIncorrect'))
     } else{
       setEmailError('')
     }
@@ -62,9 +65,9 @@ export default function Registration() {
     const passwordHandler = (e) => {
         setPassword(e.target.value);
       if(e.target.value.length > 8 || e.target.value.length < 3){
-        setPasswordError('Пароль должен быть длинннее 3 и меньше 8 символов')
+        setPasswordError(t('passwordIncorrect'))
         if(!e.target.value.length){
-          setPasswordError('Пароль не может быть пустым')
+          setPasswordError(t('passwordNull'))
         }
       }
        else{
@@ -73,7 +76,7 @@ export default function Registration() {
   
     return (
       <Stack alignItems='center'  >
-          <h1>Регистрация личного кабинетa</h1>
+          <h1>{t('registrationAccount')}</h1>
         <Stack flexDirection='column' >
           {(emailError && emailDirty) && <div style={{color:'red'}}>{emailError}</div>}
           <Input 
@@ -85,7 +88,7 @@ export default function Registration() {
             onBlur={e => blurHandler(e)} 
             name='email' 
             type='text' 
-            placeholder='Введите ваш email.....'
+            placeholder= {t('logEnter')}
           />
           {(passwordError && passwordDirty) && <div style={{color:'red'}}>{passwordError}</div>}
           <Input 
@@ -97,7 +100,7 @@ export default function Registration() {
             onBlur={e => blurHandler(e)} 
             name='password' 
             type='password' 
-            placeholder='Введите ваш пароль.....'/>
+            placeholder={t('passwordEnter')}/>
             {(passwordDoubleError && passwordDoubleDirty) && <div style={{color:'red'}}>{passwordDoubleError}</div>}
             <Input 
               onChange={e => passwordDoubleHandler(e)}
@@ -108,20 +111,20 @@ export default function Registration() {
               onBlur={e => blurHandler(e)} 
               name='passwordDouble' 
               type='passwordDouble' 
-              placeholder='Введите повторно ваш пароль.....'/>
+              placeholder={t('passwordEnter')} />
           <Button 
             disabled={!formValid}
             sx={{
               marginTop: '25px'
             }} 
             onClick={onRegistrationUser}
-          >Подтвердить</Button>
+          >{t('confirm')}</Button>
           <Button 
           href='/autorization'
             sx={{
               marginTop: '25px'
             }} 
-          >Есть аккаунт? Авторизоваться</Button>
+          >{t('logInHaveAcc')}</Button>
         </Stack>
       </Stack>
     )

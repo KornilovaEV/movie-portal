@@ -3,11 +3,12 @@ import AppContext from '../../../context';
 import styles from './AddToFavorite.module.css'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { red, grey } from '@mui/material/colors';
+import { useTranslation } from 'react-i18next';
 
 export default function AddToFavorite({movie}) {
     const {userItems, movieItems, setMovieItems
     } = useContext(AppContext);
-
+    const { t } = useTranslation();
     const [isFavorite, setIsFavorite] = useState(false);
 
       useEffect(() => {
@@ -30,18 +31,10 @@ export default function AddToFavorite({movie}) {
               }
         } 
         catch (error) {
-            alert('Ошибка при добавлении в избранное');
+            alert(t('likeError'));
             console.error(error);
         };
       };
-      // const onAddTo = () => {
-      //   setUserItems(prevUsers => prevUsers.map(user => {
-      //       if (user.session === true) {
-      //         return { ...user, like: movieItems };
-      //       }
-      //       return user;
-      //     }));
-    // }
       const style = movieItems && movieItems.some((item) => item.kinopoiskId === movie.kinopoiskId)
       ?
       { color: red[500] } :

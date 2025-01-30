@@ -4,6 +4,8 @@ import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { resetQuery, selectQuery } from '../../../features/currentQuerySlice';
+import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 export default function SelectMovies({
     countriesList,
     genresList,
@@ -14,19 +16,9 @@ export default function SelectMovies({
     year,
     genreId,
     }) {
-
+        const { t } = useTranslation();
         const dispatch = useDispatch();
-
-    const ordersList = [
-        {
-            title: 'По рейтингу',
-            value: 'RATING'
-        },
-        {
-            title: 'По оценкам',
-            value: 'NUM_VOTE'
-        },
-    ]
+    const ordersList = ['RATING', 'NUM_VOTE']
 
     const yearList = new Array(50).fill(null).map( (_, ind) => ({
         title: new Date().getFullYear() - ind, 
@@ -45,20 +37,20 @@ export default function SelectMovies({
         gap: 1,
     }} >
         <FormControl fullWidth size="small">
-            <InputLabel>Сортировка</InputLabel>
+            <InputLabel>{t('order')}</InputLabel>
             <Select
                 value={order}
                 onChange={e => dispatch(selectQuery({order: e.target.value}))}
                 label="Order"
             >
                 {ordersList.map(order => (
-                    <MenuItem key={order.title} value={order.value}>{order.title}</MenuItem>
+                    <MenuItem key={order} value={order}>{t(order)}</MenuItem>
                 ))}
             </Select>
         </FormControl>
 
         <FormControl fullWidth size="small">
-            <InputLabel>Страна</InputLabel>
+            <InputLabel>{t('countries')}</InputLabel>
             <Select
                 value={countries}
                 onChange={e => dispatch(selectQuery({countries: e.target.value}))}
@@ -72,7 +64,7 @@ export default function SelectMovies({
 
 
         <FormControl fullWidth size="small">
-            <InputLabel>Жанр</InputLabel>
+            <InputLabel>{t('genre')}</InputLabel>
             <Select
                 value={genreId}
                 onChange={e => dispatch(selectQuery({genreId: e.target.value}))}
@@ -85,7 +77,7 @@ export default function SelectMovies({
         </FormControl>
         
         <FormControl fullWidth size="small">
-            <InputLabel>Год</InputLabel>
+            <InputLabel>{t('year')}</InputLabel>
             <Select
                 value={year}
                 onChange={e => dispatch(selectQuery({year: e.target.value}))}
@@ -98,7 +90,7 @@ export default function SelectMovies({
         </FormControl>
 
         <FormControl fullWidth size="small">
-            <InputLabel>Рейтинг с</InputLabel>
+            <InputLabel>{t('ratingFrom')}</InputLabel>
             <Select
                 value={ratingFrom}
                 onChange={e => dispatch(selectQuery({ratingFrom: e.target.value}))}
@@ -111,7 +103,7 @@ export default function SelectMovies({
         </FormControl>
 
         <FormControl fullWidth size="small">
-            <InputLabel>Рейтинг по</InputLabel>
+            <InputLabel>{t('ratingTo')}</InputLabel>
         <Select
                 value={ratingTo}
                 onChange={e => dispatch(selectQuery({ratingTo: e.target.value}))}
@@ -124,7 +116,7 @@ export default function SelectMovies({
         </FormControl>
 
         <Box>
-            <Button onClick={() => dispatch(resetQuery())} variant='outlined' startIcon={<CloseIcon/> }>Сбросить</Button>
+            <Button onClick={() => dispatch(resetQuery())} variant='outlined' startIcon={<CloseIcon/> }>{t('reset')}</Button>
         </Box>
 
     </Stack>

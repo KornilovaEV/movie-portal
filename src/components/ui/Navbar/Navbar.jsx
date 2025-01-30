@@ -11,21 +11,26 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MovieFilterOutlinedIcon from '@mui/icons-material/MovieFilterOutlined';
 import { Link } from 'react-router-dom';
-import {pages} from '../../../constants'
 import Search from '../Search';
 import AppContext from '../../../context';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import { ColorModeContext } from '../../ToggleColorMode';
+import { useContext } from 'react';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
+import LanguageMode from '../../LanguageMode';
 
 function Navbar() {
 
-  const {userItems, } = React.useContext(AppContext);  
-
+  const {userItems,} = useContext(AppContext);  
+  const { mode, toggleColorMode } = useContext(ColorModeContext);
+  const { t } = useTranslation(); // Получение функции перевода
   React.useEffect(() => {
             localStorage.setItem('userItems', JSON.stringify(userItems));
         }, [userItems]);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -55,9 +60,11 @@ function Navbar() {
                 flexGrow: 20
               }}
             > movie-portal</Typography>
-
+            <LanguageMode />            
+              <IconButton  color="inherit" onClick={toggleColorMode}>
+                {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+              </IconButton>
             <Search />
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -76,13 +83,17 @@ function Navbar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' },}}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu} >
-                  <Link key={page.name} to={page.url}>
-                    <Typography sx={{ textAlign: 'center' }}>{page.name}</Typography>
+                <MenuItem onClick={handleCloseNavMenu} >
+                  <Link to='/like'>
+                    <Typography sx={{ textAlign: 'center' }}>{t('navLike')}</Typography>
                   </Link>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleCloseNavMenu} >
+                <Link to='/user'>
+                  <Typography sx={{ textAlign: 'center' }}>{t('navProfile')}</Typography>
+                </Link>
+              </MenuItem>
+
             </Menu>
           </Box>
           
@@ -120,7 +131,7 @@ function Navbar() {
                 >
                   <FavoriteBorderIcon />
                 </IconButton>
-                Like
+                {t('navLike')} 
               </Button>
               <Button
                 href= '/user'              
@@ -134,34 +145,9 @@ function Navbar() {
                 >
                   <AccountCircleIcon />
                 </IconButton>
-                {userItems.map(user => user.session && user.email) }
-                
+                {userItems.map(user => user.session && user.email)}
               </Button>
-            {/* {pages.map((page) => (
-              <Button
-              key={page.name}
-                href= {
-                  page.url
-                }                
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', }}
-              >
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  sx={{ mr: 2 }}
-                >
-                  <Icon  iconName={page.icon} />
-                </IconButton>
-                {// {userItems.map(user => user.session && user.email)}
-                 }
-                {page.name}
-              </Button>
-            ))} 
-            */}
             </Box>
-          
-          
         </Toolbar>
       </Container>
     </AppBar>

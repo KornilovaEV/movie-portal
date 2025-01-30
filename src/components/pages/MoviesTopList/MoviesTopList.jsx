@@ -7,11 +7,14 @@ import MoviesList from '../../ui/MoviesList';
 import { ArrowBack } from '@mui/icons-material';
 import ErrorMessage from '../../ui/ErrorMessage';
 import MoviesTopListSkeleton from './MoviesTopListSkeleton';
+import { useTranslation } from 'react-i18next';
 
 export default function MoviesTopList() {
   const location = useLocation();
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const { t } = useTranslation(); // Получение функции перевода
+  
 
   const movieType = menuItem.find(el => el.url === location.pathname);
   
@@ -32,7 +35,8 @@ export default function MoviesTopList() {
     <>
       <Stack flexDirection='row' sx={{mt: 2, mb: 2}}>
         <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)}  />
-        <Typography variant='h5'>{movieType.name}</Typography>
+        <Typography variant='h5'>{ t(movieType.value)
+          }</Typography>
       </Stack>
       <MoviesList 
           movies={data.items} 

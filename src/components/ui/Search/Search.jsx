@@ -5,16 +5,18 @@ import { useNavigate } from 'react-router-dom';
 
 import { setSearchQuery } from '../../../features/searchQuerySlice';
 import { useGetFilmsQuery } from '../../../services/kinopoiskAPI';
+import { useTranslation } from 'react-i18next';
 
-
-const movieTypes = {
-  FILM: 'Фильм',       
-  TV_SERIES: 'Сериал',
-  TV_SHOW: 'ТВ-Шоу',
-  MINI_SERIES: 'Мини-сериал',
-};
 
 export default function Search() {
+      const { t } = useTranslation(); // Получение функции перевода
+      const movieTypes = {
+        FILM: t('/films'),       
+        TV_SERIES: t('/series'),
+        TV_SHOW: t('tv_shows'),
+        MINI_SERIES: t('mini_series'),
+      };
+  
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,14 +45,20 @@ export default function Search() {
     keyword,
   });
 
+
   return (
     <Autocomplete
       freeSolo
       sx={{
         width: 250,
       }}
-      getOptionLabel={option =>
-        `${option.nameRu} - ${movieTypes[option.type]} - ${option.year}`
+      getOptionLabel={
+        option =>
+        `${//language === 'ru'?
+           option.nameRu 
+          //: option.nameOriginal
+
+        } - ${movieTypes[option.type]} - ${option.year}`
       }
       options={data ? data.items : []}
       onInputChange={(_, value) => {
@@ -62,7 +70,7 @@ export default function Search() {
       renderInput={params => (
         <TextField
           {...params}
-          label="Поиск"
+          label={t('search')}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

@@ -1,7 +1,10 @@
 import { Stack, Typography } from '@mui/material'
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+    const { t } = useTranslation(); // Получение функции перевода
+  
   return (
     <Stack component='footer' 
     sx={{paddingTop: 4, 
@@ -14,8 +17,9 @@ export default function Footer() {
 
     <Typography variant='body2' color='text.secondary'>
       &copy; {new Date().getFullYear()} &laquo;movie-portal&raquo;<br/>
-    Данный сайт создан Костенко Е.В. для итогового проекта<br/>
-    по курсу &laquo;React-интенсив&raquo; от &laquo;Aston&raquo;	&#128516;
+      {t('footer')} <br/>
+      {t('footer2')}
+      &#128516;
      </Typography>
     <Typography variant='h5' color='primary.main' >movie-portal</Typography>
 

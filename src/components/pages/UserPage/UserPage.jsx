@@ -1,8 +1,11 @@
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import AppContext from '../../../context';
+import { useTranslation } from 'react-i18next';
 
 export default function UserPage() {
+    const { t } = useTranslation(); // Получение функции перевода
+  
     const {userItems, setUserItems, movieItems, setMovieItems} = useContext(AppContext);  
 
     useEffect(() => {
@@ -26,13 +29,11 @@ export default function UserPage() {
 
   return (
     <>
-    <div>UserPage</div>
-    <Button 
-            sx={{
-              marginTop: '25px'
-            }} 
-            onClick={onLogOutUser}
-          >Выйти с аккаунта?</Button>
+    <Typography margin='auto' variant='h3' textAlign='center'>{userItems.map(user => user.session && user.email) }
+    </Typography>
+    <Button onClick={onLogOutUser}>
+      {t('logOut')}
+    </Button>
     </>
   )
 }

@@ -1,20 +1,24 @@
 import { Alert, Button,  Input, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../../context';
+import { useTranslation } from 'react-i18next';
 
 export default function Authorization() {
   const {movieItems, setMovieItems, userItems, setUserItems} = useContext(AppContext);  
-
+    const { t } = useTranslation();
   useEffect(() => {
-            localStorage.setItem('userItems', JSON.stringify(userItems));
-        }, [userItems]);
+      localStorage.setItem('userItems', JSON.stringify(userItems));
+  }, [userItems]);
+  useEffect(() => {
+    localStorage.setItem('movieItems', JSON.stringify(movieItems));
+  }, [movieItems]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [emailError, setEmailError] = useState('Email не может быть пустым');
-  const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
+  const [emailError, setEmailError] = useState(t('emailNull'));
+  const [passwordError, setPasswordError] = useState(t('passwordNull'));
   const [formValid, setFormValid] = useState(false);
   const [alertError, setAlertError] = useState(false);
 
@@ -22,9 +26,7 @@ export default function Authorization() {
     (emailError ||  passwordError) ?  setFormValid(false) : setFormValid(true)
   }, [emailError, passwordError])
 
-  useEffect(() => {
-        localStorage.setItem('movieItems', JSON.stringify(movieItems));
-    }, [movieItems]);
+  
 
   const onAutorizationUser = () => {
     setUserItems(prevUsers => prevUsers.map( user => {
@@ -57,7 +59,7 @@ export default function Authorization() {
     const re =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   if(!re.test(String(e.target.value).toLocaleLowerCase())){
-    setEmailError('Email не корректный')
+    setEmailError(t('emailIncorrect'))
   } else{
     setEmailError('')
   }
@@ -65,9 +67,9 @@ export default function Authorization() {
   const passwordHandler = (e) => {
     setPassword(e.target.value);
   if(e.target.value.length > 8 || e.target.value.length < 3){
-    setPasswordError('Пароль должен быть длинннее 3 и меньше 8 символов')
+    setPasswordError(t('passwordIncorrect'))
     if(!e.target.value.length){
-      setPasswordError('Пароль не может быть пустым')
+      setPasswordError(t('passwordNull'))
     }
   }
    else{
@@ -77,7 +79,7 @@ export default function Authorization() {
 
   return (
     <Stack alignItems='center'  >
-        <h1>Войти в личный кабинет</h1>
+        <h1>{t('logIn')}</h1>
       <Stack flexDirection='column' >
         {(emailError && emailDirty) && <div style={{color:'red'}}>{emailError}</div>}
         <Input 
@@ -89,7 +91,7 @@ export default function Authorization() {
           onBlur={e => blurHandler(e)} 
           name='email' 
           type='text' 
-          placeholder='Введите ваш email.....'
+          placeholder={t('logEnter')}
         />
         {(passwordError && passwordDirty) && <div style={{color:'red'}}>{passwordError}</div>}
         <Input 
@@ -101,17 +103,17 @@ export default function Authorization() {
           onBlur={e => blurHandler(e)} 
           name='password' 
           type='password' 
-          placeholder='Введите ваш пароль.....'/>
+          placeholder={t('passwordEnter')}/>
         <Button 
           onClick={onAutorizationUser}
           disabled={!formValid}
           sx={{
             marginTop: '25px'
           }} 
-        >Подтвердить</Button>
+        >{t('confirm')}</Button>
         {alertError && 
         <Alert variant="filled" severity="error" onClose={() => {setAlertError(false)}}>
-            Проверьте правильность ввода пароля и/или лологина
+            {t('errorAuthorization')}
         </Alert>
         }
         <Button 
@@ -119,7 +121,7 @@ export default function Authorization() {
           sx={{
             marginTop: '25px'
           }} 
-        >Зарестрироваться</Button>
+        >{t('registration')} </Button>
       </Stack>
     </Stack>
   )

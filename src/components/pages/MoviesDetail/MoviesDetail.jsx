@@ -6,6 +6,8 @@ import ErrorMessage from '../../ui/ErrorMessage';
 import { ArrowBack, Language, Movie } from '@mui/icons-material';
 import AddToFavorite from '../../ui/AddToFavorite/AddToFavorite';
 import AppContext from '../../../context';
+import { useTranslation } from 'react-i18next';
+
 export default function MoviesDetail() {
   const {userItems} = useContext(AppContext);  
 

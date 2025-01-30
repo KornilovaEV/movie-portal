@@ -9,8 +9,11 @@ import { movieTypes } from '../../../constants'
 import { useSelector } from 'react-redux';
 import SelectMovies from '../../ui/SelectMovies/SelectMovies';
 import MoviesTopMainSkeleton from './MoviesTopMainSkeleton';
+import { useTranslation } from 'react-i18next';
 
 export default function MoviesTopMain() {
+    const { t } = useTranslation(); // Получение функции перевода
+  
   const location = useLocation();
   const { countries, order, year, genreId, ratingFrom, ratingTo} = useSelector(
     state => state.currentQuerySlice
@@ -39,7 +42,9 @@ export default function MoviesTopMain() {
     <>
       <Stack flexDirection='row' sx={{mt: 2, mb: 2}}>
         <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)}  />
-        <Typography variant='h5'>{movieType.name}</Typography>
+        <Typography variant='h5'>{t(movieType.url)}
+          
+        </Typography>
       </Stack>
       <SelectMovies 
         countriesList={responseGenresAndCountriesQuery.data.countries} 
