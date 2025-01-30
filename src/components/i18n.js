@@ -47,11 +47,7 @@ const resources = {
       'ratingTo': 'Rating to',
       'reset':'Reset',
       'RATING':'By rating',
-      'NUM_VOTE':'By evaluation'
-
-
-
-
+      'NUM_VOTE':'By evaluation',
 
     }
   },
@@ -99,10 +95,7 @@ const resources = {
       'ratingTo': 'Рейтинг по',
       'reset':'Сбросить',
       'RATING':'По рейтингу',
-      'NUM_VOTE':'По оценкам'
-
-
-
+      'NUM_VOTE':'По оценкам',
 
     }
   }
