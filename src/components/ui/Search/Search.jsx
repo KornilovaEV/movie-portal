@@ -56,7 +56,7 @@ export default function Search() {
         option =>
         `${//language === 'ru'?
            option.nameRu 
-          //: option.nameOriginal
+          //  : option.nameOriginal
 
         } - ${movieTypes[option.type]} - ${option.year}`
       }
