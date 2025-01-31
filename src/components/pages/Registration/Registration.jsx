@@ -1,4 +1,4 @@
-import { Button, Input, Stack } from '@mui/material';
+import { Button, Input, Link, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../../context';
 import { useTranslation } from 'react-i18next';
@@ -120,7 +120,8 @@ export default function Registration() {
             onClick={onRegistrationUser}
           >{t('confirm')}</Button>
           <Button 
-          href='/autorization'
+        component={Link}
+          to='/autorization'
             sx={{
               marginTop: '25px'
             }} 

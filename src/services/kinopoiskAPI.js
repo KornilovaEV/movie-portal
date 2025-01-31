@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-require('dotenv').config();
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// require('dotenv').config();
 
 const excludeGenres = [
   '',
@@ -11,14 +11,12 @@ const excludeGenres = [
 ];
 
 // Define a service using a base URL and expected endpoints
-export const kinopoiskApi = createApi({
-  
+export const kinopoiskApi = createApi({  
   reducerPath: 'kinopoiskApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://kinopoiskapiunofficial.tech/api',
     prepareHeaders: headers => {
         headers.set('X-API-KEY', 
           process.env.REACT_APP_KINOPOISK_KEY
-
         );
         headers.set('Content-Type','application/json');
     }

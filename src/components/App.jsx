@@ -1,5 +1,5 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React, { lazy, Suspense, useEffect, useState, useContext, createContext, useReducer } from "react";
+import { createBrowserRouter, RouterProvider, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Movies from "./pages/Movies";
 import { movieTypes, menuItem } from "../constants";
@@ -18,17 +18,21 @@ const UserPage = lazy(() => import("./pages/UserPage"));
 
 
 function App() {
+  const { t } = useTranslation();
+  const LoadingFallback = () => <Stack textAlign="center" m="auto">{t('loading')}...</Stack>;
+
   const [movieItems, setMovieItems] = useState(() => {
     const saved = localStorage.getItem("movieItems");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });  
-  const { t } = useTranslation();
+  
   const [userItems, setUserItems] = useState(() => {
     const saved = localStorage.getItem("userItems");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });  
+
   useEffect(() => {
               localStorage.setItem('userItems', JSON.stringify(userItems));
           }, [userItems]);
@@ -39,44 +43,44 @@ function App() {
       element: <Layout/>,
       children: [
         {
-          path: "/",
+          index: true,//path: "/",
           element: <Movies/>
         },
         ...movieTypes.map(el =>({
           path: el.url,
-          element: <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><MoviesTopMain/></Suspense>
+          element: <Suspense fallback={<LoadingFallback />}><MoviesTopMain/></Suspense>
         })),
         ...menuItem.map(el =>({
           path: el.url,
-          element: <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><MoviesTopList/></Suspense>
+          element: <Suspense fallback={<LoadingFallback />}><MoviesTopList/></Suspense>
         })),
         {
           path: "/like",
-          element:  userItems.some( user => user.session === true) 
+          element:  userItems.some((user) => user.session)
           ?
-           <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><LikePage/></Suspense> 
+           <Suspense fallback={<LoadingFallback />}><LikePage/></Suspense> 
           :
-          <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><Authorization/></Suspense>
+          <Suspense fallback={<LoadingFallback />}><Authorization/></Suspense>
         },
         {
           path: "/autorization",
-          element: <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><Authorization/></Suspense>
+          element: <Suspense fallback={<LoadingFallback />}><Authorization/></Suspense>
         },
         {
           path: "/registration",
-          element: <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><Registration/></Suspense>
+          element: <Suspense fallback={<LoadingFallback />}><Registration/></Suspense>
         },
         {
           path: "/user",
-          element: userItems.some( user => user.session === true) 
+          element: userItems.some((user) => user.session)
           ?  
-          <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><UserPage/></Suspense> 
+          <Suspense fallback={<LoadingFallback />}><UserPage/></Suspense> 
           : 
-          <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><Authorization/></Suspense>
+          <Suspense fallback={<LoadingFallback />}><Authorization/></Suspense>
         },
         {
           path: "/movie/:id",
-          element: <Suspense fallback={<Stack textAlign='center' m='auto' >{t('loading')}...</Stack>}><MoviesDetail/></Suspense>
+          element: <Suspense fallback={<LoadingFallback />}><MoviesDetail/></Suspense>
         },
         {
           path: "*",
@@ -84,12 +88,12 @@ function App() {
         },
       ]
     },
-  ]);
+  ]
+);
   return ( 
-    <AppContext.Provider value={{movieItems, setMovieItems,
-      userItems, setUserItems}} >
-        <RouterProvider router={router}/>
-      </AppContext.Provider>
+      <AppContext.Provider value={{movieItems, setMovieItems, userItems, setUserItems}} >
+          <RouterProvider router={router}/>
+        </AppContext.Provider>
   )
 }
 

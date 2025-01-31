@@ -2,6 +2,7 @@ import { Alert, Button,  Input, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../../context';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function Authorization() {
   const {movieItems, setMovieItems, userItems, setUserItems} = useContext(AppContext);  
@@ -117,7 +118,8 @@ export default function Authorization() {
         </Alert>
         }
         <Button 
-        href='/registration'
+        component={Link}
+        to='/registration'
           sx={{
             marginTop: '25px'
           }} 

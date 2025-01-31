@@ -119,8 +119,9 @@ function Navbar() {
           
           
             <Box  sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-                href= '/like'              
+            <Button 
+            component={Link}
+            to='/like'              
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', }}
               >
@@ -134,7 +135,8 @@ function Navbar() {
                 {t('navLike')} 
               </Button>
               <Button
-                href= '/user'              
+                component={Link}  
+                to= '/user'              
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', }}
               >

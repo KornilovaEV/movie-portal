@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useGetFilmQuery, useGetStaffQuery } from '../../../services/kinopoiskAPI';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, ButtonGroup, CircularProgress, Grid, Typography } from '@mui/material';
 import ErrorMessage from '../../ui/ErrorMessage';
 import { ArrowBack, Language, Movie } from '@mui/icons-material';
@@ -9,6 +9,7 @@ import AppContext from '../../../context';
 import { useTranslation } from 'react-i18next';
 
 export default function MoviesDetail() {
+    const { t } = useTranslation();
   const {userItems} = useContext(AppContext);  
 
   useEffect(() => {
@@ -117,10 +118,15 @@ export default function MoviesDetail() {
       >
         <Grid item xs={12}>
           <ButtonGroup variant="outlined" size='small'>
-            <Button target='_blank' href={responseFilm.data.webUrl} endIcon={<Language />} >Кинопоиск</Button>
+            <Button 
+              target='_blank' 
+              component={Link} to={responseFilm.data.webUrl} 
+              endIcon={<Language />} 
+              >{t('kinopoisk')}</Button>
             {responseFilm.data.imbId && <Button 
               target='_blank' 
-              href={`https://www.imdb.com/title/${responseFilm.data.imbId}`} 
+              component='Link'
+              to={`https://www.imdb.com/title/${responseFilm.data.imbId}`} 
               endIcon={<Movie />}
             >IMDB</Button>}
         </ButtonGroup>          
