@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/movie-portal/static/css/main.327e4cef.css",
-    "main.js": "/movie-portal/static/js/main.43fdc713.js",
-    "static/js/549.40ac3b3e.chunk.js": "/movie-portal/static/js/549.40ac3b3e.chunk.js",
+    "main.js": "/movie-portal/static/js/main.bac08cc3.js",
+    "static/js/549.2fe78d7f.chunk.js": "/movie-portal/static/js/549.2fe78d7f.chunk.js",
     "static/css/961.cbc89f5b.chunk.css": "/movie-portal/static/css/961.cbc89f5b.chunk.css",
     "static/js/961.9fa894a4.chunk.js": "/movie-portal/static/js/961.9fa894a4.chunk.js",
     "static/css/362.ec59a598.chunk.css": "/movie-portal/static/css/362.ec59a598.chunk.css",
@@ -12,13 +12,13 @@
     "static/js/364.ec36d83e.chunk.js": "/movie-portal/static/js/364.ec36d83e.chunk.js",
     "static/css/305.ec59a598.chunk.css": "/movie-portal/static/css/305.ec59a598.chunk.css",
     "static/js/305.c46437c1.chunk.js": "/movie-portal/static/js/305.c46437c1.chunk.js",
-    "static/js/672.1f8200eb.chunk.js": "/movie-portal/static/js/672.1f8200eb.chunk.js",
+    "static/js/322.92da95da.chunk.js": "/movie-portal/static/js/322.92da95da.chunk.js",
     "static/js/151.f8ed5c5d.chunk.js": "/movie-portal/static/js/151.f8ed5c5d.chunk.js",
     "static/js/580.29d26dab.chunk.js": "/movie-portal/static/js/580.29d26dab.chunk.js",
     "index.html": "/movie-portal/index.html",
     "main.327e4cef.css.map": "/movie-portal/static/css/main.327e4cef.css.map",
-    "main.43fdc713.js.map": "/movie-portal/static/js/main.43fdc713.js.map",
-    "549.40ac3b3e.chunk.js.map": "/movie-portal/static/js/549.40ac3b3e.chunk.js.map",
+    "main.bac08cc3.js.map": "/movie-portal/static/js/main.bac08cc3.js.map",
+    "549.2fe78d7f.chunk.js.map": "/movie-portal/static/js/549.2fe78d7f.chunk.js.map",
     "961.cbc89f5b.chunk.css.map": "/movie-portal/static/css/961.cbc89f5b.chunk.css.map",
     "961.9fa894a4.chunk.js.map": "/movie-portal/static/js/961.9fa894a4.chunk.js.map",
     "362.ec59a598.chunk.css.map": "/movie-portal/static/css/362.ec59a598.chunk.css.map",
@@ -28,12 +28,12 @@
     "364.ec36d83e.chunk.js.map": "/movie-portal/static/js/364.ec36d83e.chunk.js.map",
     "305.ec59a598.chunk.css.map": "/movie-portal/static/css/305.ec59a598.chunk.css.map",
     "305.c46437c1.chunk.js.map": "/movie-portal/static/js/305.c46437c1.chunk.js.map",
-    "672.1f8200eb.chunk.js.map": "/movie-portal/static/js/672.1f8200eb.chunk.js.map",
+    "322.92da95da.chunk.js.map": "/movie-portal/static/js/322.92da95da.chunk.js.map",
     "151.f8ed5c5d.chunk.js.map": "/movie-portal/static/js/151.f8ed5c5d.chunk.js.map",
     "580.29d26dab.chunk.js.map": "/movie-portal/static/js/580.29d26dab.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.327e4cef.css",
-    "static/js/main.43fdc713.js"
+    "static/js/main.bac08cc3.js"
   ]
 }
