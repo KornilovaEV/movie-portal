@@ -48,6 +48,13 @@ const resources = {
       'reset':'Reset',
       'RATING':'By rating',
       'NUM_VOTE':'By evaluation',
+      'kinopoisk': 'Kinopoisk',
+      'directors':'Directors',
+      'duration':'Duration',
+      'min':'min',
+      'description':'Description',
+      'descriptionNull': 'The description is missing on the portal',
+      'leadingRoles':'In leading roles:',
 
     }
   },
@@ -96,6 +103,13 @@ const resources = {
       'reset':'Сбросить',
       'RATING':'По рейтингу',
       'NUM_VOTE':'По оценкам',
+      'kinopoisk': 'Кинопоиск',
+      'directors':'Режиссеры',
+      'duration':'Продолжительность',
+      'min':'мин',
+      'description':'Описание',
+      'descriptionNull': 'Описание отсутствует на портале',
+      'leadingRoles':'В главных ролях:',
 
     }
   }

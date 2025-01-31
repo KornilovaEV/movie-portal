@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useGetFilmQuery, useGetStaffQuery } from '../../../services/kinopoiskAPI';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, ButtonGroup, CircularProgress, Grid, Typography } from '@mui/material';
@@ -10,7 +10,13 @@ import { useTranslation } from 'react-i18next';
 
 export default function MoviesDetail() {
     const { t } = useTranslation();
-  const {userItems} = useContext(AppContext);  
+    const {userItems} = useContext(AppContext);  
+    const [language, setLanguage] = useState(localStorage.getItem('language') || 'ru');
+
+    useEffect(() => {
+      setLanguage(localStorage.getItem('language'))
+    }, [localStorage.getItem('language')])
+
 
   useEffect(() => {
             localStorage.setItem('userItems', JSON.stringify(userItems));
@@ -49,7 +55,10 @@ export default function MoviesDetail() {
               </Button>
             </Grid>
             <Grid item xs={9} ml="10px"> 
-              <Typography variant='h5' alignContent='center'>{responseFilm.data.nameRu}</Typography>
+              <Typography variant='h5' alignContent='center'>{language === 'ru' ? 
+              responseFilm.data.nameRu : 
+              (responseFilm.data.nameOriginal || responseFilm.data.nameRu)
+              }</Typography>
             </Grid>
             <Grid item xs={1} ml="10px"> 
               <Typography position='relative' variant='h5' alignContent='center'>{
@@ -59,25 +68,25 @@ export default function MoviesDetail() {
             </Grid>
           </Grid>
           <Grid container >
-            <Grid item xs={6}> <Typography>Год</Typography>
+            <Grid item xs={6}> <Typography>{t('year')}</Typography>
             </Grid>
             <Grid item xs={6}> <Typography gutterBottom>{responseFilm.data.year}</Typography>
             </Grid>
-            <Grid item xs={6}> <Typography>Страна</Typography>
+            <Grid item xs={6}> <Typography>{t('countries')}</Typography>
             </Grid>
             <Grid item xs={6}> 
               {responseFilm.data.countries.map(({country}) => (
                 <Typography key={country} gutterBottom>{country}</Typography>
               ))}
             </Grid>
-            <Grid item xs={6}> <Typography>Жанры</Typography>
+            <Grid item xs={6}> <Typography>{t('genre')}</Typography>
             </Grid>
             <Grid item xs={6}> 
               {responseFilm.data.genres.map(({genre}) => (
                 <Typography key={genre} gutterBottom>{genre}</Typography>
               ))}
             </Grid>
-            <Grid item xs={6}> <Typography>Режиссеры</Typography>
+            <Grid item xs={6}> <Typography>{t('directors')}</Typography>
             </Grid>
             <Grid item xs={6}> 
               {responseStaff.data
@@ -86,18 +95,18 @@ export default function MoviesDetail() {
                 <Typography key={nameRu} gutterBottom>{nameRu}</Typography>
               ))}
             </Grid>
-            <Grid item xs={6}> <Typography>Продолжительность</Typography>
+            <Grid item xs={6}> <Typography>{t('duration')}</Typography>
             </Grid>
-            <Grid item xs={6}> <Typography gutterBottom>{responseFilm.data.filmLength} мин</Typography>
+            <Grid item xs={6}> <Typography gutterBottom>{responseFilm.data.filmLength}{t('min')}</Typography>
             </Grid>
-            <Grid item xs={12}> <Typography gutterBottom>Описание</Typography>
+            <Grid item xs={12}> <Typography gutterBottom>{t('description')}</Typography>
             </Grid>
-            <Grid item xs={12}> <Typography gutterBottom>{responseFilm.data.description ? responseFilm.data.description : 'Описание отсутствует на портале'}</Typography>
+            <Grid item xs={12}> <Typography gutterBottom>{responseFilm.data.description ? responseFilm.data.description : t('descriptionNull')}</Typography>
             </Grid>
           </Grid>
         </Grid>
         <Grid item md={2} sm={12}> 
-          <Typography variant='h6'>В главных ролях:</Typography>
+          <Typography variant='h6'>{t('leadingRoles')}</Typography>
           {
             responseStaff.data.filter(el => el.professionText === 'Актеры')
             .slice(0, 15)
@@ -113,7 +122,7 @@ export default function MoviesDetail() {
         display='flex' 
         justifyContent='center' 
         alignItems='center' 
-        flexDirection='column' ///////////////////////////////////////////////////
+        flexDirection='column'
         mt='5px'
       >
         <Grid item xs={12}>
