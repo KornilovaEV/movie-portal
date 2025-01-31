@@ -1,6 +1,7 @@
+// import 'dotenv/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // require('dotenv').config();
-
+const config = require('../config.json');
 const excludeGenres = [
   '',
   'новости',
@@ -16,7 +17,8 @@ export const kinopoiskApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://kinopoiskapiunofficial.tech/api',
     prepareHeaders: headers => {
         headers.set('X-API-KEY', 
-          process.env.REACT_APP_KINOPOISK_KEY
+          // process.env.REACT_APP_KINOPOISK_KEY
+          config.REACT_APP_KINOPOISK_KEY
         );
         headers.set('Content-Type','application/json');
     }
