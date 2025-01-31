@@ -39,7 +39,7 @@ function App() {
   
   const router = createBrowserRouter([
     {
-      path: "/movie-portal/",
+      path: "/",
       element: <Layout/>,
       children: [
         {
