@@ -55,6 +55,7 @@ const resources = {
       'description':'Description',
       'descriptionNull': 'The description is missing on the portal',
       'leadingRoles':'In leading roles:',
+      'emailDuplicate': 'This email already exists',
 
     }
   },
@@ -110,6 +111,7 @@ const resources = {
       'description':'Описание',
       'descriptionNull': 'Описание отсутствует на портале',
       'leadingRoles':'В главных ролях:',
+      'emailDuplicate': 'Данный email уже существует',
 
     }
   }

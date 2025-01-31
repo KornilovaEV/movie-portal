@@ -2,8 +2,10 @@ import { Button, Input, Link, Stack } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../../context';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function Registration() {
+  const navigate = useNavigate();
     const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -30,7 +32,8 @@ export default function Registration() {
         setUserItems((prev) => [...prev, {'email': email, 'password': password, 'session': true, 'like': [] }]);
         setEmail('');
         setPassword('');
-        setPasswordDouble('');        
+        setPasswordDouble('');       
+        navigate('/user'); 
     };
     const blurHandler = (e) => {
       switch (e.target.name) {
@@ -50,7 +53,9 @@ export default function Registration() {
       setEmail(e.target.value);
       const re =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if(!re.test(String(e.target.value).toLocaleLowerCase())){
+    if (userItems.some( user => user.email === e.target.value)){
+      setEmailError(t('emailDuplicate'))
+    } else if(!re.test(String(e.target.value).toLocaleLowerCase())){
       setEmailError(t('emailIncorrect'))
     } else{
       setEmailError('')
@@ -60,7 +65,11 @@ export default function Registration() {
         setPasswordDouble(e.target.value);
     if(e.target.value === password){
         setPasswordDoubleError('')
-    }}
+    }
+        else{
+          setPasswordDoubleError(t('passwordEqual'))
+        }
+    }
 
     const passwordHandler = (e) => {
         setPassword(e.target.value);

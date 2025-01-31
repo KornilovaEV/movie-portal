@@ -15,7 +15,7 @@ https://kornilovaev.github.io/movie-portal/
 10 - есть
 11 - есть 
 12 - в папке services
-13 - есть
+13 - есть, в app/store.js
 14 - реализовано
 
 ## Реализовано из НЕ обязательного: 
