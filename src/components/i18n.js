@@ -5,7 +5,7 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      'logOut': 'Log out of your account?',
+      'logOut': 'log out of your account?',
       'error': 'An error has occurred',
       'errorMessage':'There is no such page',
       'errorMessageToHome': 'Go back to the main page',
@@ -56,12 +56,17 @@ const resources = {
       'descriptionNull': 'The description is missing on the portal',
       'leadingRoles':'In leading roles:',
       'emailDuplicate': 'This email already exists',
+      'exit': 'Do you really want to ',
+      'yes': 'Yes',
+      'no': 'No',
+      'deleteAcc': 'delete your account?',
+
 
     }
   },
   ru: {
     translation: {
-      'logOut': 'Выйти с аккаунта?',
+      'logOut': 'выйти с аккаунта?',
       'error': 'Произошла ошибка',
       'errorMessage':'Такой страницы не существует',
       'errorMessageToHome': 'Вернуться на главную',
@@ -112,6 +117,11 @@ const resources = {
       'descriptionNull': 'Описание отсутствует на портале',
       'leadingRoles':'В главных ролях:',
       'emailDuplicate': 'Данный email уже существует',
+      'exit': 'Вы действительно хотите ',
+      'yes': 'Да',
+      'no': 'Нет',
+      'deleteAcc': 'удалить ваш аккаунт?',
+
 
     }
   }

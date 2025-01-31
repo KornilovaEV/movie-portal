@@ -1,11 +1,19 @@
 import { Button, Typography } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../../context';
 import { useTranslation } from 'react-i18next';
-
+import DialogMessage from '../../ui/DialogMessage';
 export default function UserPage() {
     const { t } = useTranslation(); // Получение функции перевода
-  
+    const [openMessageExitAcc, setOpenMessageExitAcc] = useState(false);
+    const handleClickOpenMessageExitAcc = () => {
+      setOpenMessageExitAcc(true);
+    };
+   
+    const [openMessageDeleteAcc, setOpenMessageDeleteAcc] = useState(false);
+    const handleClickOpenMessageDeleteAcc = () => {
+      setOpenMessageDeleteAcc(true);
+    };
     const {userItems, setUserItems, movieItems, setMovieItems} = useContext(AppContext);  
 
     useEffect(() => {
@@ -17,23 +25,33 @@ export default function UserPage() {
 
 
     const onLogOutUser = () => {
-        setUserItems(prevUsers => prevUsers.map(user => {
-            if (user.session === true) {
-              return { ...user, session: false, like: movieItems };
-            }
-            return user;
-          }));
-          setMovieItems([]);
+      setUserItems(prevUsers => prevUsers.map(user => {
+          if (user.session === true) {
+            return { ...user, session: false, like: movieItems };
+          }
+          return user;
+        }));
+        setMovieItems([]);
+    }
 
+    const onDeleteUser = () => {
+      setUserItems(prevUsers => prevUsers.filter(user => 
+        user.session !== true))
+        setMovieItems([]);
     }
 
   return (
     <>
     <Typography margin='auto' variant='h3' textAlign='center'>{userItems.map(user => user.session && user.email) }
     </Typography>
-    <Button onClick={onLogOutUser}>
+    <Button  onClick={handleClickOpenMessageExitAcc}> 
       {t('logOut')}
     </Button>
+    < DialogMessage message={t('logOut')} onClickAdd={onLogOutUser} open={openMessageExitAcc} setOpen={setOpenMessageExitAcc}/>
+    <Button  onClick={handleClickOpenMessageDeleteAcc}> 
+      {t('deleteAcc')}
+    </Button>
+    < DialogMessage message={t('deleteAcc')} onClickAdd={onDeleteUser} open={openMessageDeleteAcc} setOpen={setOpenMessageDeleteAcc}/>
     </>
   )
 }

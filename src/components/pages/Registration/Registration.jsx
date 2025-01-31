@@ -19,7 +19,6 @@ export default function Registration() {
     const [formValid, setFormValid] = useState(false);
     const {userItems, setUserItems} = useContext(AppContext);  
     
-
     useEffect(() => {
               localStorage.setItem('userItems', JSON.stringify(userItems));
           }, [userItems]);
@@ -48,7 +47,7 @@ export default function Registration() {
             break;
       }
     }
-  
+
     const emailHandler = (e) => {
       setEmail(e.target.value);
       const re =
@@ -61,19 +60,13 @@ export default function Registration() {
       setEmailError('')
     }
     }
-    const passwordDoubleHandler = (e) => {
-        setPasswordDouble(e.target.value);
-    if(e.target.value === password){
-        setPasswordDoubleError('')
-    }
-        else{
-          setPasswordDoubleError(t('passwordEqual'))
-        }
-    }
+    
 
     const passwordHandler = (e) => {
         setPassword(e.target.value);
-      if(e.target.value.length > 8 || e.target.value.length < 3){
+        if(passwordDouble && passwordDouble !== e.target.value){
+          setPasswordError(t('passwordEqual'))
+        } else if(e.target.value.length > 8 || e.target.value.length < 3){
         setPasswordError(t('passwordIncorrect'))
         if(!e.target.value.length){
           setPasswordError(t('passwordNull'))
@@ -82,6 +75,16 @@ export default function Registration() {
        else{
         setPasswordError('')
       }}
+
+      const passwordDoubleHandler = (e) => {
+        setPasswordDouble(e.target.value);
+    if(e.target.value === password){
+        setPasswordDoubleError('')
+    }
+        else{
+          setPasswordDoubleError(t('passwordEqual'))
+        }
+    }
   
     return (
       <Stack alignItems='center'  >
