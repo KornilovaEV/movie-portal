@@ -12,7 +12,7 @@
 5. реализовываю при помощи Kinopoisk API Unofficial
 6. есть (например в Movies)
 7. есть, в папке hooks
-8. 
+8. есть в компонентах: SelectMovies, MoviesList, DialogMessage
 9. есть в поиске
 10. есть
 11. есть 
