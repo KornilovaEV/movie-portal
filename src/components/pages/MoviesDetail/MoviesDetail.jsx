@@ -43,7 +43,7 @@ export default function MoviesDetail() {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container mt={2} spacing={2}>
         <Grid item md={3} mt='15px' sm={12}>
           <img src={responseFilm.data.posterUrl} alt={responseFilm.data.nameRu} width='100%' />
         </Grid>
@@ -91,6 +91,7 @@ export default function MoviesDetail() {
             <Grid item xs={6}> 
               {responseStaff.data
                 .filter(el => el.professionText === 'Режиссеры')
+                .slice(0, 10) 
                 .map(({nameRu}) => (
                 <Typography key={nameRu} gutterBottom>{nameRu}</Typography>
               ))}
@@ -111,7 +112,7 @@ export default function MoviesDetail() {
             responseStaff.data.filter(el => el.professionText === 'Актеры')
             .slice(0, 15)
             .map(({nameRu}) => (
-            <Typography key={nameRu} gutterBottom>{nameRu}</Typography>
+            <Typography key={nameRu} gutterBottom>- {nameRu}</Typography>
             ))
           }
         </Grid>
