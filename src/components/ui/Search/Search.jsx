@@ -1,4 +1,4 @@
-import { Autocomplete, CircularProgress, TextField } from '@mui/material';
+import { Autocomplete, CircularProgress, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,12 @@ import { useTranslation } from 'react-i18next';
 
 
 export default function Search() {
-      const { t } = useTranslation(); // Получение функции перевода
+      const { t } = useTranslation(); 
+      const [language, setLanguage] = useState(localStorage.getItem('language') || 'ru');
+      
+          useEffect(() => {
+            setLanguage(localStorage.getItem('language'))
+          }, [localStorage.getItem('language')])
       const movieTypes = {
         FILM: t('/films'),       
         TV_SERIES: t('/series'),
@@ -54,11 +59,11 @@ export default function Search() {
       }}
       getOptionLabel={
         option =>
-        `${//language === 'ru'?
-           option.nameRu 
-          //  : option.nameOriginal
-
-        } - ${movieTypes[option.type]} - ${option.year}`
+        `${
+          (language === 'ru' ? 
+              option.nameRu : 
+              (option.nameOriginal || option.nameRu)) || 'не'
+        } - ${movieTypes[option.type] || 'найдено'} - ${option.year || 'ничего'}`
       }
       options={data ? data.items : []}
       onInputChange={(_, value) => {

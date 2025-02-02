@@ -1,4 +1,4 @@
-import { Box, Rating, Stack, Tooltip, Link } from '@mui/material'
+import { Box, Rating, Stack, Tooltip, Link, Typography, Button } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link as RouterLink} from 'react-router-dom'
 import styles from '../../ui/MoviesCard/MoviesCard.module.css'
@@ -15,7 +15,7 @@ export default function LikePage() {
 
   return (
     <Stack  flexDirection='row'  flexWrap='wrap' justifyContent='center'>
-  {movieItems.map(movie =>
+  {movieItems.length > 0 ? movieItems.map(movie =>
   
     <Stack key={movie.kinopoiskId} alignItems='center' sx={{ position: 'relative' }}>
       <AddToFavorite movie={movie}/>
@@ -34,7 +34,13 @@ export default function LikePage() {
         </Tooltip>
       </Stack>
     )}
-    </Stack>)}
+    </Stack>)
+    :
+    <Stack marginTop='20%'>
+      <Typography  variant='h3'>У вас нет избранных</Typography>
+      <Button sx={{marginTop: '15px'}} component={RouterLink} to='/'>Перейти в каталог</Button>
+    </Stack>
+  }
   </Stack>
 
 

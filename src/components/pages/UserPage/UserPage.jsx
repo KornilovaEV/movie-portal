@@ -42,7 +42,8 @@ export default function UserPage() {
 
   return (
     <>
-    <Typography margin='auto' variant='h3' textAlign='center'>{userItems.map(user => user.session && user.email) }
+    <Typography margin='auto' variant='h3' textAlign='center' sx={{wordBreak: 'break-all'}} >
+      {userItems.map(user => user.session && user.email)}
     </Typography>
     <Button  onClick={handleClickOpenMessageExitAcc}> 
       {t('logOut')}
