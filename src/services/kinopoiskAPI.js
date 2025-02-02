@@ -8,15 +8,13 @@ const excludeGenres = [
   'реальное ТВ',
   'ток-шоу',
 ];
-
 // Define a service using a base URL and expected endpoints
 export const kinopoiskApi = createApi({  
   reducerPath: 'kinopoiskApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://kinopoiskapiunofficial.tech/api',
     prepareHeaders: headers => {
         headers.set('X-API-KEY', 
-          process.env.REACT_APP_KINOPOISK_KEY
-        );
+          process.env.REACT_APP_KINOPOISK_KEY);
         headers.set('Content-Type','application/json');
     }
    }),
