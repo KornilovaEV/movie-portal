@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 export default function DialogMessage({ message, onClickAdd, open, setOpen}) {
     const { t } = useTranslation(); // Получение функции перевода
@@ -33,4 +34,11 @@ export default function DialogMessage({ message, onClickAdd, open, setOpen}) {
     </Dialog>
     
   )
+}
+
+DialogMessage.propTypes = {
+    message: PropTypes.string,
+    onClickAdd: PropTypes.func,
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }

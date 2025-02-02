@@ -1,8 +1,8 @@
 import { Pagination, Stack } from '@mui/material';
 import React from 'react';
 import MoviesCard from '../MoviesCard';
+import PropTypes from 'prop-types';
 export default function MoviesList({movies, totalPages, page, setPage}) {
-
   return (
     <>
       <Stack direction='row' justifyContent='center' flexWrap='wrap'>
@@ -25,4 +25,11 @@ export default function MoviesList({movies, totalPages, page, setPage}) {
       </Stack>
   </>
   )
+}
+
+
+MoviesList.propTypes = {
+    totalPages: PropTypes.number,
+    page: PropTypes.number,
+    setPage: PropTypes.func
 }

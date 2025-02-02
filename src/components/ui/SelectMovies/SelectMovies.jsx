@@ -4,8 +4,9 @@ import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { resetQuery, selectQuery } from '../../../features/currentQuerySlice';
-import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+
 export default function SelectMovies({
     countriesList,
     genresList,
@@ -121,4 +122,16 @@ export default function SelectMovies({
 
     </Stack>
   )
+}
+
+
+SelectMovies.propTypes = {
+    countriesList: PropTypes.array ,
+    genresList: PropTypes.array ,
+    ratingFrom: PropTypes.string ,
+    ratingTo: PropTypes.string ,
+    countries: PropTypes.string ,
+    order: PropTypes.string ,
+    year: PropTypes.string ,
+    genreId: PropTypes.string ,
 }
